@@ -7,32 +7,41 @@ use require_lifetimes::require_lifetimes;
 ///
 /// Make sure it passes this test:
 ///
-/// ```rust
-/// use ex04::vector_set;
-///
-///
-/// // Create a vector of strings.
-/// let strings = vec!["Hello".to_string(), "My".to_string(), "Name".to_string(), "Is".to_string(), "Tom".to_string()];
-///
-/// // Create some strings to replace inside that vector.
-/// let your = "Your".to_string();
-/// let unknown = "Unknown".to_string();
-///
-///
-/// // Create a vector of references to the string vector.
-/// let mut message: Vec<&str> = strings.iter().map(|s| s.as_str()).collect();
-///
-/// // Set some references
-/// vector_set(&mut message, 1, &your);
-/// vector_set(&mut message, 4, &unknown);
-/// vector_set(&mut message, 10, &unknown);
-///
-/// // Hopefully, they're now equal
-/// assert_eq!(message , vec!["Hello", "Your", "Name", "Is", "Unknown"]);
-/// ````
+
 #[require_lifetimes(!)]
-pub fn vector_set(vector: &mut Vec<&str>, loc: usize, new: &str) {
+pub fn vector_set<'a, 'b>(vector: &'a mut Vec<&'b str>, loc: usize, new: &'b str) {
     // TODO: You will need to write this code yourself.
     //       Don't worry, it's only one line long.
-    todo!()
+    if let Some(elem) = vector.get_mut(loc) {
+        *elem = new;
+    }
+}
+
+#[test]
+mod tests {
+    fn test() {
+        // Create a vector of strings.
+        let strings = vec![
+            "Hello".to_string(),
+            "My".to_string(),
+            "Name".to_string(),
+            "Is".to_string(),
+            "Tom".to_string(),
+        ];
+
+        // Create some strings to replace inside that vector.
+        let your = "Your".to_string();
+        let unknown = "Unknown".to_string();
+
+        // Create a vector of references to the string vector.
+        let mut message: Vec<&str> = strings.iter().map(|s| s.as_str()).collect();
+
+        // Set some references
+        vector_set(&mut message, 1, &your);
+        vector_set(&mut message, 4, &unknown);
+        vector_set(&mut message, 10, &unknown);
+
+        // Hopefully, they're now equal
+        assert_eq!(message, vec!["Hello", "Your", "Name", "Is", "Unknown"]);
+    }
 }

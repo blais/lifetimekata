@@ -9,8 +9,10 @@ members = [
         "exercises/04_mutable_references_and_containers/solutions",
         "exercises/05_lifetimes_on_types/exercise",
         "exercises/05_lifetimes_on_types/solutions",
+        "exercises/06_lifetimes_on_impls/exercise",
         "exercises/07_special_lifetimes/exercise",
         "exercises/07_special_lifetimes/solutions",
         "exercises/08_finale/exercise",
         "exercises/08_finale/solutions",
+        "exercises/09_further_reading/exercise",
 ]

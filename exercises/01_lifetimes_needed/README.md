@@ -87,13 +87,13 @@ fn split(text: &str, delimiter: &str) -> Vec<&str> {
         }
         if text[i..].starts_with(delimiter) {
             matches.push(&text[last_split..i]);
-            last_split = i + delimiter.len(); 
+            last_split = i + delimiter.len();
         }
     }
     if last_split < text.len() {
         matches.push(&text[last_split..]);
     }
-    
+
     matches
 }
 ```
@@ -127,7 +127,7 @@ corner of the code block will reveal the answers.
 
 ``` rust,ignore
 
-# // a is the only input reference.
+ # // a is the only input reference.
 # // the only thing the function can return is a
 fn identity(a: &i32) -> &i32 {
     a
@@ -194,4 +194,3 @@ fn example_4() {
     assert_eq!(answer, &7);
 }
 ```
-
